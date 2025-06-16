@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comprehensive Weight Loss Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1000px;
+            margin: 30px auto;
+            padding: 15px;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+        
+        .input-group {
+            margin-bottom: 15px;
+        }
+        
+        .radio-group {
+            margin-bottom: 20px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+        }
+        
+        .radio-group label {
+            display: inline-block;
+            margin-right: 20px;
+            font-weight: bold;
+            color: #555;
+            cursor: pointer;
+        }
+        
+        input[type="radio"] {
+            margin-right: 8px;
+            transform: scale(1.2);
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 3px;
+            font-weight: bold;
+            color: #555;
+            font-size: 14px;
+        }
+        
+        .radio-group label {
+            display: inline-block;
+            margin-bottom: 0;
+        }
+        
+        input[type="number"] {
+            width: 100%;
+            padding: 8px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+        
+        input[type="number"]:focus {
+            border-color: #4CAF50;
+            outline: none;
+        }
+        
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 25px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            width: 100%;
+            margin-top: 8px;
+        }
+        
+        button:hover {
+            background-color: #45a049;
+        }
+        
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #e8f5e8;
+            border-radius: 5px;
+            border-left: 4px solid #4CAF50;
+            display: none;
+        }
+        
+        .result h2 {
+            margin-top: 0;
+            margin-bottom: 12px;
+            color: #2e7d32;
+            text-align: center;
+            font-size: 20px;
+        }
+        
+        .patient-info {
+            display: flex;
+            justify-content: space-around;
+            text-align: center;
+            font-size: 16px;
+            margin-bottom: 8px;
+            color: #2e7d32;
+            font-weight: bold;
+            flex-wrap: wrap;
+        }
+        
+        .patient-info div {
+            margin: 3px;
+        }
+        
+        .bmi-category {
+            text-align: center;
+            font-size: 12px;
+            margin-bottom: 8px;
+            color: #555;
+            font-style: italic;
+        }
+        
+        .surgery-note {
+            background-color: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 5px;
+            padding: 8px;
+            margin-bottom: 10px;
+            color: #856404;
+            text-align: center;
+            font-size: 12px;
+        }
+        
+        .results-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            font-size: 12px;
+        }
+        
+        .results-table th,
+        .results-table td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+            vertical-align: top;
+            line-height: 1.2;
+        }
+        
+        .results-table th {
+            background-color: #4CAF50;
+            color: white;
+            font-weight: bold;
+            font-size: 13px;
+        }
+        
+        .results-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        
+        .results-table tr:hover {
+            background-color: #f5f5f5;
+        }
+        
+        .category-header {
+            background-color: #2e7d32 !important;
+            color: white !important;
+            font-weight: bold;
+            text-align: center;
+            padding: 6px !important;
+        }
+        
+        .comment-cell {
+            font-size: 11px;
+            color: #666;
+            max-width: 300px;
+            line-height: 1.3;
+        }
+        
+        .disclaimer {
+            margin-top: 12px;
+            font-size: 10px;
+            color: #666;
+            font-style: italic;
+            line-height: 1.3;
+        }
+        
+        @media print {
+            body {
+                margin: 10px;
+                padding: 0;
+            }
+            .container {
+                padding: 10px;
+                box-shadow: none;
+            }
+            .results-table th,
+            .results-table td {
+                padding: 6px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Comprehensive Weight Loss Calculator</h1>
+        
+        <form id="weightLossForm">
+            <div class="input-group">
+                <label for="weight">Weight (pounds):</label>
+                <input type="number" id="weight" name="weight" min="50" max="1000" step="0.1" required>
+            </div>
+            
+            <div class="radio-group">
+                <label>
+                    <input type="radio" name="inputType" value="bmi" checked onchange="toggleInputType()">
+                    Enter BMI
+                </label>
+                <label>
+                    <input type="radio" name="inputType" value="height" onchange="toggleInputType()">
+                    Enter Height
+                </label>
+            </div>
+            
+            <div class="input-group" id="bmiGroup">
+                <label for="bmi">BMI:</label>
+                <input type="number" id="bmi" name="bmi" min="10" max="60" step="0.01" required>
+            </div>
+            
+            <div class="input-group" id="heightGroup" style="display: none;">
+                <label for="height">Height (inches):</label>
+                <input type="number" id="height" name="height" min="36" max="96" step="0.1">
+            </div>
+            
+            <button type="submit">Calculate Weight Loss Options</button>
+        </form>
+        
+        <div class="result" id="result">
+            <h2>Expected Weight Loss by Treatment Option</h2>
+            
+            <div class="patient-info">
+                <div id="currentWeight"></div>
+                <div id="currentBMI"></div>
+            </div>
+            
+            <div class="bmi-category" id="bmiCategory"></div>
+            <div class="surgery-note" id="surgeryNote" style="display: none;"></div>
+            
+            <table class="results-table">
+                <thead>
+                    <tr>
+                        <th>Treatment Option</th>
+                        <th>Weight Loss Range (lbs)</th>
+                        <th>Comments</th>
+                    </tr>
+                </thead>
+                <tbody id="resultsTableBody">
+                </tbody>
+            </table>
+            
+            <div class="disclaimer">
+                *These are estimates based on clinical trial data and medical literature. Individual results may vary significantly. 
+                Surgical procedures carry additional risks and require medical evaluation. 
+                Consult with your healthcare provider for personalized medical advice and to determine the most appropriate treatment option for your situation.
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Define weight loss options with their percentage ranges and comments
+        const weightLossOptions = [
+            { 
+                name: "Roux-en-Y", 
+                minPercent: 25.0, 
+                maxPercent: 35.0, 
+                category: "surgical",
+                comment: "Surgery $$$$"
+            },
+            { 
+                name: "Sleeve gastrectomy", 
+                minPercent: 20.0, 
+                maxPercent: 30.0, 
+                category: "surgical",
+                comment: "Surgery $$$$"
+            },
+            { 
+                name: "Adjustable band", 
+                minPercent: 10.0, 
+                maxPercent: 20.0, 
+                category: "surgical",
+                comment: "Surgery $$$$"
+            },
+            { 
+                name: "Zepbound", 
+                minPercent: 15.0, 
+                maxPercent: 22.5, 
+                category: "medication",
+                comment: "Monthly injection, approved for weight loss or sleep apnea $$$"
+            },
+            { 
+                name: "Mounjaro", 
+                minPercent: 15.0, 
+                maxPercent: 22.5, 
+                category: "medication",
+                comment: "Monthly injection, approved ONLY for diabetes $$$"
+            },
+            { 
+                name: "Wegovy", 
+                minPercent: 10.0, 
+                maxPercent: 15.0, 
+                category: "medication",
+                comment: "Monthly injection, approved for weight loss or heart disease $$$"
+            },
+            { 
+                name: "Ozempic", 
+                minPercent: 10.0, 
+                maxPercent: 15.0, 
+                category: "medication",
+                comment: "Monthly injection, approved ONLY for diabetes $$$"
+            },
+            { 
+                name: "Rybelsus", 
+                minPercent: 5.0, 
+                maxPercent: 10.0, 
+                category: "medication",
+                comment: "Daily tablet $$$"
+            },
+            { 
+                name: "Qsymia", 
+                minPercent: 5.0, 
+                maxPercent: 10.0, 
+                category: "medication",
+                comment: "Daily tablet $$"
+            },
+            { 
+                name: "Saxenda", 
+                minPercent: 5.0, 
+                maxPercent: 10.0, 
+                category: "medication",
+                comment: "Daily injection $$$$"
+            },
+            { 
+                name: "Contrave", 
+                minPercent: 5.0, 
+                maxPercent: 10.0, 
+                category: "medication",
+                comment: "Twice daily tablet $$"
+            },
+            { 
+                name: "phentermine", 
+                minPercent: 5.0, 
+                maxPercent: 10.0, 
+                category: "medication",
+                comment: "Daily tablet $"
+            },
+            { 
+                name: "Trulicity", 
+                minPercent: 3.0, 
+                maxPercent: 6.0, 
+                category: "medication",
+                comment: "Weekly injection, approved ONLY for diabetes $$$$"
+            },
+            { 
+                name: "Xenical", 
+                minPercent: 3.0, 
+                maxPercent: 5.0, 
+                category: "medication",
+                comment: "Daily tablet $$"
+            },
+            { 
+                name: "metformin", 
+                minPercent: 2.0, 
+                maxPercent: 5.0, 
+                category: "medication",
+                comment: "Daily tablet, 1-2x daily $"
+            },
+            { 
+                name: "Alli", 
+                minPercent: 3.0, 
+                maxPercent: 5.0, 
+                category: "medication",
+                comment: "Daily tablet $"
+            }
+        ];
+
+        function getBMICategory(bmi) {
+            if (bmi < 18.5) return "Underweight";
+            else if (bmi < 25) return "Normal weight";
+            else if (bmi < 30) return "Overweight";
+            else if (bmi < 35) return "Obesity Class I";
+            else if (bmi < 40) return "Obesity Class II";
+            else return "Obesity Class III";
+        }
+
+        function toggleInputType() {
+            const inputType = document.querySelector('input[name="inputType"]:checked').value;
+            const heightGroup = document.getElementById('heightGroup');
+            const bmiGroup = document.getElementById('bmiGroup');
+            const heightInput = document.getElementById('height');
+            const bmiInput = document.getElementById('bmi');
+            
+            if (inputType === 'height') {
+                heightGroup.style.display = 'block';
+                bmiGroup.style.display = 'none';
+                heightInput.required = true;
+                bmiInput.required = false;
+                bmiInput.value = '';
+            } else {
+                heightGroup.style.display = 'none';
+                bmiGroup.style.display = 'block';
+                heightInput.required = false;
+                bmiInput.required = true;
+                heightInput.value = '';
+            }
+            
+            // Clear results when switching input type
+            document.getElementById('result').style.display = 'none';
+        }
+
+        document.getElementById('weightLossForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get input values
+            const inputType = document.querySelector('input[name="inputType"]:checked').value;
+            const weight = parseFloat(document.getElementById('weight').value);
+            let bmi;
+            
+            // Validate weight
+            if (!weight || weight <= 0) {
+                alert('Please enter a valid weight.');
+                return;
+            }
+            
+            // Calculate or get BMI based on input type
+            if (inputType === 'height') {
+                const height = parseFloat(document.getElementById('height').value);
+                if (!height || height <= 0) {
+                    alert('Please enter a valid height.');
+                    return;
+                }
+                // Calculate BMI from height and weight
+                bmi = (weight * 703) / (height * height);
+            } else {
+                // Get BMI directly from input
+                bmi = parseFloat(document.getElementById('bmi').value);
+                if (!bmi || bmi <= 0) {
+                    alert('Please enter a valid BMI.');
+                    return;
+                }
+            }
+            
+            const roundedBMI = Math.round(bmi * 10) / 10;
+            
+            // Display current weight and BMI
+            document.getElementById('currentWeight').textContent = `Weight: ${weight} lbs`;
+            document.getElementById('currentBMI').textContent = `BMI: ${roundedBMI}`;
+            document.getElementById('bmiCategory').textContent = getBMICategory(roundedBMI);
+            
+            // Check if surgery options should be shown
+            const showSurgery = roundedBMI >= 35;
+            const surgeryNote = document.getElementById('surgeryNote');
+            
+            if (!showSurgery) {
+                surgeryNote.style.display = 'block';
+                surgeryNote.textContent = 'Surgical options are typically considered for patients with BMI ≥ 35. Only medication options are shown below.';
+            } else {
+                surgeryNote.style.display = 'none';
+            }
+            
+            // Calculate and display results
+            const tableBody = document.getElementById('resultsTableBody');
+            tableBody.innerHTML = '';
+            
+            // Add surgical procedures if BMI >= 35
+            if (showSurgery) {
+                const surgicalHeader = tableBody.insertRow();
+                surgicalHeader.innerHTML = '<td colspan="3" class="category-header">Surgical Procedures</td>';
+                
+                weightLossOptions.filter(option => option.category === 'surgical').forEach(option => {
+                    const row = tableBody.insertRow();
+                    const minLoss = Math.round(weight * (option.minPercent / 100));
+                    const maxLoss = Math.round(weight * (option.maxPercent / 100));
+                    
+                    row.innerHTML = `
+                        <td>${option.name}</td>
+                        <td>${minLoss} to ${maxLoss} lbs</td>
+                        <td class="comment-cell">${option.comment}</td>
+                    `;
+                });
+            }
+            
+            // Add medications header
+            const medicationHeader = tableBody.insertRow();
+            medicationHeader.innerHTML = '<td colspan="3" class="category-header">Medications</td>';
+            
+            // Add medications (sorted by effectiveness)
+            weightLossOptions.filter(option => option.category === 'medication')
+                .sort((a, b) => b.maxPercent - a.maxPercent)
+                .forEach(option => {
+                    const row = tableBody.insertRow();
+                    const minLoss = Math.round(weight * (option.minPercent / 100));
+                    const maxLoss = Math.round(weight * (option.maxPercent / 100));
+                    
+                    row.innerHTML = `
+                        <td>${option.name}</td>
+                        <td>${minLoss} to ${maxLoss} lbs</td>
+                        <td class="comment-cell">${option.comment}</td>
+                    `;
+                });
+            
+            // Show result section
+            document.getElementById('result').style.display = 'block';
+            
+            // Scroll to result
+            document.getElementById('result').scrollIntoView({ behavior: 'smooth' });
+        });
+        
+        // Clear result when inputs change
+        document.getElementById('height').addEventListener('input', clearResult);
+        document.getElementById('weight').addEventListener('input', clearResult);
+        document.getElementById('bmi').addEventListener('input', clearResult);
+        
+        function clearResult() {
+            document.getElementById('result').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
