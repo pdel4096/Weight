@@ -1,542 +1,280 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Comprehensive Weight Loss Calculator</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            max-width: 1000px;
-            margin: 30px auto;
-            padding: 15px;
-            background-color: #f5f5f5;
-        }
-        
-        .container {
-            background-color: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-        
-        h1 {
-            color: #333;
-            text-align: center;
-            margin-bottom: 20px;
-            font-size: 24px;
-        }
-        
-        .input-group {
-            margin-bottom: 15px;
-        }
-        
-        .radio-group {
-            margin-bottom: 20px;
-            padding: 10px;
-            background-color: #f9f9f9;
-            border-radius: 5px;
-        }
-        
-        .radio-group label {
-            display: inline-block;
-            margin-right: 20px;
-            font-weight: bold;
-            color: #555;
-            cursor: pointer;
-        }
-        
-        input[type="radio"] {
-            margin-right: 8px;
-            transform: scale(1.2);
-        }
-        
-        label {
-            display: block;
-            margin-bottom: 3px;
-            font-weight: bold;
-            color: #555;
-            font-size: 14px;
-        }
-        
-        .radio-group label {
-            display: inline-block;
-            margin-bottom: 0;
-        }
-        
-        input[type="number"] {
-            width: 100%;
-            padding: 8px;
-            border: 2px solid #ddd;
-            border-radius: 5px;
-            font-size: 14px;
-            box-sizing: border-box;
-        }
-        
-        input[type="number"]:focus {
-            border-color: #4CAF50;
-            outline: none;
-        }
-        
-        button {
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px 25px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 14px;
-            width: 100%;
-            margin-top: 8px;
-        }
-        
-        button:hover {
-            background-color: #45a049;
-        }
-        
-        .result {
-            margin-top: 20px;
-            padding: 15px;
-            background-color: #e8f5e8;
-            border-radius: 5px;
-            border-left: 4px solid #4CAF50;
-            display: none;
-        }
-        
-        .result h2 {
-            margin-top: 0;
-            margin-bottom: 12px;
-            color: #2e7d32;
-            text-align: center;
-            font-size: 20px;
-        }
-        
-        .patient-info {
-            display: flex;
-            justify-content: space-around;
-            text-align: center;
-            font-size: 16px;
-            margin-bottom: 8px;
-            color: #2e7d32;
-            font-weight: bold;
-            flex-wrap: wrap;
-        }
-        
-        .patient-info div {
-            margin: 3px;
-        }
-        
-        .bmi-category {
-            text-align: center;
-            font-size: 12px;
-            margin-bottom: 8px;
-            color: #555;
-            font-style: italic;
-        }
-        
-        .surgery-note {
-            background-color: #fff3cd;
-            border: 1px solid #ffeaa7;
-            border-radius: 5px;
-            padding: 8px;
-            margin-bottom: 10px;
-            color: #856404;
-            text-align: center;
-            font-size: 12px;
-        }
-        
-        .results-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 10px;
-            font-size: 12px;
-        }
-        
-        .results-table th,
-        .results-table td {
-            padding: 8px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-            vertical-align: top;
-            line-height: 1.2;
-        }
-        
-        .results-table th {
-            background-color: #4CAF50;
-            color: white;
-            font-weight: bold;
-            font-size: 13px;
-        }
-        
-        .results-table tr:nth-child(even) {
-            background-color: #f9f9f9;
-        }
-        
-        .results-table tr:hover {
-            background-color: #f5f5f5;
-        }
-        
-        .category-header {
-            background-color: #2e7d32 !important;
-            color: white !important;
-            font-weight: bold;
-            text-align: center;
-            padding: 6px !important;
-        }
-        
-        .comment-cell {
-            font-size: 11px;
-            color: #666;
-            max-width: 300px;
-            line-height: 1.3;
-        }
-        
-        .disclaimer {
-            margin-top: 12px;
-            font-size: 10px;
-            color: #666;
-            font-style: italic;
-            line-height: 1.3;
-        }
-        
-        @media print {
-            body {
-                margin: 10px;
-                padding: 0;
-            }
-            .container {
-                padding: 10px;
-                box-shadow: none;
-            }
-            .results-table th,
-            .results-table td {
-                padding: 6px;
-            }
-        }
-    </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Weight-Loss Options Estimator</title>
+<style>
+  :root{
+    --paper:#FBFBF9; --ink:#1A1D1F; --muted:#5A6169; --faint:#8A9099;
+    --accent:#0B6E6E; --rule:#E4E6E3; --rule-strong:#CDD1CC;
+    --tint:#F2F5F3; --zebra:#F6F8F6; --warn:#9A3B24;
+    --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,"Times New Roman",serif;
+    --sans:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.45;font-size:16px}
+  .wrap{max-width:820px;margin:0 auto;padding:22px 20px 48px}
+
+  header{border-bottom:2px solid var(--ink);padding-bottom:10px;margin-bottom:16px}
+  .eyebrow{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin:0 0 5px}
+  h1{font-family:var(--serif);font-weight:600;font-size:26px;line-height:1.1;margin:0 0 6px;letter-spacing:-.01em}
+  .lede{color:var(--muted);font-size:14px;margin:0;max-width:62ch}
+
+  .panel{display:flex;flex-wrap:wrap;gap:14px 26px;align-items:flex-end;
+    background:var(--tint);border:1px solid var(--rule);border-radius:9px;padding:12px 16px;margin-bottom:10px}
+  .field{display:flex;flex-direction:column;gap:5px}
+  .field label{font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);font-weight:600}
+  .field .opt{color:var(--faint);font-weight:500;text-transform:none;letter-spacing:0}
+  .field input{font-family:var(--mono);font-size:19px;width:140px;padding:8px 11px;
+    border:1px solid var(--rule-strong);border-radius:7px;background:#fff;color:var(--ink);-webkit-appearance:none;appearance:none}
+  .field input:focus{outline:2px solid var(--accent);outline-offset:1px;border-color:var(--accent)}
+  .field .unit{font-family:var(--sans);font-size:12px;color:var(--faint);margin-top:1px}
+  .hint{color:var(--muted);font-size:12.5px;margin:0 0 14px}
+
+  .empty{color:var(--faint);font-style:italic;padding:22px 4px;border-top:1px solid var(--rule)}
+
+  table.results{width:100%;border-collapse:collapse;font-size:14px}
+  table.results caption{caption-side:top;text-align:left;color:var(--muted);font-size:13px;padding:0 0 8px;font-weight:600}
+  table.results th{text-align:left;font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);
+    font-weight:600;padding:0 9px 6px;border-bottom:1px solid var(--rule-strong);white-space:nowrap}
+  table.results th.num,table.results td.num{text-align:right;font-variant-numeric:tabular-nums}
+  table.results th.ctr,table.results td.ctr{text-align:center}
+  tr.spacer td{padding:0;height:9px;border:none;background:var(--paper)}
+  .grouprow td{padding:8px 12px;font-size:16px;font-weight:700;color:#fff;background:var(--ink);letter-spacing:.01em}
+  .cat-note td{padding:6px 9px 3px;color:var(--muted);font-size:12px;font-weight:400;text-transform:none;letter-spacing:0}
+  tr.item td{padding:6px 9px;border-bottom:1px solid var(--rule);vertical-align:middle}
+  tr.item.alt td{background:var(--zebra)}
+  .drug{font-weight:600;line-height:1.25}
+  .dose{color:var(--muted);font-weight:400;font-size:12.5px}
+  .cost{color:var(--accent);font-family:var(--mono);font-weight:700;letter-spacing:1px}
+  td.num.lb,td.num.after,td.num.bmi{font-family:var(--mono);font-size:13.5px}
+  td.num.after{font-weight:600}
+
+  .eff{display:flex;align-items:center;gap:8px;justify-content:flex-end}
+  .eff .val{font-family:var(--mono);font-weight:600;min-width:42px;text-align:right}
+  .bar{height:7px;width:88px;background:var(--rule);border-radius:4px;overflow:hidden;flex:none}
+  .bar > i{display:block;height:100%;background:var(--accent);border-radius:4px}
+  .note-mark{color:var(--warn);font-weight:700}
+
+  .actions{display:flex;flex-wrap:wrap;gap:9px;margin:20px 0 0;align-items:center}
+  button.copy{font-family:var(--sans);font-size:14px;font-weight:600;cursor:pointer;padding:9px 15px;border-radius:8px;
+    border:1px solid var(--accent);background:var(--accent);color:#fff}
+  button.copy.alt{background:#fff;color:var(--accent)}
+  button.copy:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+  .copied{color:var(--accent);font-size:13px;font-weight:600;opacity:0;transition:opacity .15s}
+  .copied.show{opacity:1}
+
+  footer{margin-top:26px;padding-top:14px;border-top:1px solid var(--rule);color:var(--muted);font-size:12px}
+  footer p{margin:0 0 6px}
+  .legend{font-family:var(--mono)}
+  .disc{color:var(--warn)}
+
+  @media (max-width:600px){
+    h1{font-size:22px}
+    .bar{width:54px}
+    table.results th.hidem,table.results td.hidem{display:none}
+  }
+  @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
 </head>
 <body>
-    <div class="container">
-        <h1>Comprehensive Weight Loss Calculator</h1>
-        
-        <form id="weightLossForm">
-            <div class="input-group">
-                <label for="weight">Weight (pounds):</label>
-                <input type="number" id="weight" name="weight" min="50" max="1000" step="0.1" required>
-            </div>
-            
-            <div class="radio-group">
-                <label>
-                    <input type="radio" name="inputType" value="bmi" checked onchange="toggleInputType()">
-                    Enter BMI
-                </label>
-                <label>
-                    <input type="radio" name="inputType" value="height" onchange="toggleInputType()">
-                    Enter Height
-                </label>
-            </div>
-            
-            <div class="input-group" id="bmiGroup">
-                <label for="bmi">BMI:</label>
-                <input type="number" id="bmi" name="bmi" min="10" max="60" step="0.01" required>
-            </div>
-            
-            <div class="input-group" id="heightGroup" style="display: none;">
-                <label for="height">Height (inches):</label>
-                <input type="number" id="height" name="height" min="36" max="96" step="0.1">
-            </div>
-            
-            <button type="submit">Calculate Weight Loss Options</button>
-        </form>
-        
-        <div class="result" id="result">
-            <h2>Expected Weight Loss by Treatment Option</h2>
-            
-            <div class="patient-info">
-                <div id="currentWeight"></div>
-                <div id="currentBMI"></div>
-            </div>
-            
-            <div class="bmi-category" id="bmiCategory"></div>
-            <div class="surgery-note" id="surgeryNote" style="display: none;"></div>
-            
-            <table class="results-table">
-                <thead>
-                    <tr>
-                        <th>Treatment Option</th>
-                        <th>Weight Loss Range (lbs)</th>
-                        <th>Comments</th>
-                    </tr>
-                </thead>
-                <tbody id="resultsTableBody">
-                </tbody>
-            </table>
-            
-            <div class="disclaimer">
-                *These are estimates based on clinical trial data and medical literature. Individual results may vary significantly. 
-                Surgical procedures carry additional risks and require medical evaluation. 
-                Consult with your healthcare provider for personalized medical advice and to determine the most appropriate treatment option for your situation.
-            </div>
-        </div>
+<div class="wrap">
+  <header>
+    <p class="eyebrow">Shared decision-making aid</p>
+    <h1>Weight-loss options estimator</h1>
+    <p class="lede">Enter a starting weight to estimate expected weight loss with each approved anti-obesity medication and with bariatric surgery, using average results from the pivotal trials.</p>
+  </header>
+
+  <div class="panel">
+    <div class="field">
+      <label for="wt">Starting weight</label>
+      <input id="wt" type="number" inputmode="decimal" min="60" max="1000" step="1" placeholder="e.g. 230" autocomplete="off">
+      <span class="unit">pounds</span>
     </div>
+    <div class="field">
+      <label for="bmi">Starting BMI <span class="opt">— optional</span></label>
+      <input id="bmi" type="number" inputmode="decimal" min="15" max="90" step="0.1" placeholder="e.g. 34" autocomplete="off">
+      <span class="unit">kg/m² — adds an "estimated BMI after" column</span>
+    </div>
+  </div>
+  <p class="hint">Estimates update as you type. Figures are mean total body-weight loss at the highest labeled dose; individual results vary widely.</p>
 
-    <script>
-        // Define weight loss options with their percentage ranges and comments
-        const weightLossOptions = [
-            { 
-                name: "Roux-en-Y", 
-                minPercent: 25.0, 
-                maxPercent: 35.0, 
-                category: "surgical",
-                comment: "Surgery $$$$"
-            },
-            { 
-                name: "Sleeve gastrectomy", 
-                minPercent: 20.0, 
-                maxPercent: 30.0, 
-                category: "surgical",
-                comment: "Surgery $$$$"
-            },
-            { 
-                name: "Adjustable band", 
-                minPercent: 10.0, 
-                maxPercent: 20.0, 
-                category: "surgical",
-                comment: "Surgery $$$$"
-            },
-            { 
-                name: "Zepbound", 
-                minPercent: 15.0, 
-                maxPercent: 22.5, 
-                category: "medication",
-                comment: "Weekly injection, approved for weight loss or sleep apnea $$$"
-            },
-            { 
-                name: "Mounjaro", 
-                minPercent: 15.0, 
-                maxPercent: 22.5, 
-                category: "medication",
-                comment: "Weekly injection, approved ONLY for diabetes $$$"
-            },
-            { 
-                name: "Wegovy", 
-                minPercent: 10.0, 
-                maxPercent: 15.0, 
-                category: "medication",
-                comment: "Weekly injection, approved for weight loss or heart disease $$$"
-            },
-            { 
-                name: "Ozempic", 
-                minPercent: 10.0, 
-                maxPercent: 15.0, 
-                category: "medication",
-                comment: "Weekly injection, approved ONLY for diabetes $$$"
-            },
-            { 
-                name: "Rybelsus", 
-                minPercent: 5.0, 
-                maxPercent: 10.0, 
-                category: "medication",
-                comment: "Daily tablet $$$"
-            },
-            { 
-                name: "Qsymia", 
-                minPercent: 5.0, 
-                maxPercent: 10.0, 
-                category: "medication",
-                comment: "Daily tablet $$"
-            },
-            { 
-                name: "Saxenda", 
-                minPercent: 5.0, 
-                maxPercent: 10.0, 
-                category: "medication",
-                comment: "Daily injection $$$$"
-            },
-            { 
-                name: "Contrave", 
-                minPercent: 5.0, 
-                maxPercent: 10.0, 
-                category: "medication",
-                comment: "Twice daily tablet $$"
-            },
-            { 
-                name: "phentermine", 
-                minPercent: 5.0, 
-                maxPercent: 10.0, 
-                category: "medication",
-                comment: "Daily tablet $"
-            },
-            { 
-                name: "Trulicity", 
-                minPercent: 3.0, 
-                maxPercent: 6.0, 
-                category: "medication",
-                comment: "Weekly injection, approved ONLY for diabetes $$$$"
-            },
-            { 
-                name: "Xenical", 
-                minPercent: 3.0, 
-                maxPercent: 5.0, 
-                category: "medication",
-                comment: "Daily tablet $$"
-            },
-            { 
-                name: "metformin", 
-                minPercent: 2.0, 
-                maxPercent: 5.0, 
-                category: "medication",
-                comment: "Daily tablet, 1-2x daily $"
-            },
-            { 
-                name: "Alli", 
-                minPercent: 3.0, 
-                maxPercent: 5.0, 
-                category: "medication",
-                comment: "Daily tablet $"
-            }
-        ];
+  <div id="out"></div>
 
-        function getBMICategory(bmi) {
-            if (bmi < 18.5) return "Underweight";
-            else if (bmi < 25) return "Normal weight";
-            else if (bmi < 30) return "Overweight";
-            else if (bmi < 35) return "Obesity Class I";
-            else if (bmi < 40) return "Obesity Class II";
-            else return "Obesity Class III";
-        }
+  <div class="actions" id="actions" style="display:none">
+    <button class="copy" id="copyEpic">Copy table for Epic</button>
+    <button class="copy alt" id="copyText">Copy as plain text</button>
+    <span class="copied" id="copied">Copied</span>
+  </div>
 
-        function toggleInputType() {
-            const inputType = document.querySelector('input[name="inputType"]:checked').value;
-            const heightGroup = document.getElementById('heightGroup');
-            const bmiGroup = document.getElementById('bmiGroup');
-            const heightInput = document.getElementById('height');
-            const bmiInput = document.getElementById('bmi');
-            
-            if (inputType === 'height') {
-                heightGroup.style.display = 'block';
-                bmiGroup.style.display = 'none';
-                heightInput.required = true;
-                bmiInput.required = false;
-                bmiInput.value = '';
-            } else {
-                heightGroup.style.display = 'none';
-                bmiGroup.style.display = 'block';
-                heightInput.required = false;
-                bmiInput.required = true;
-                heightInput.value = '';
-            }
-            
-            // Clear results when switching input type
-            document.getElementById('result').style.display = 'none';
-        }
+  <footer>
+    <p class="legend">Cost: <b>$</b> ≈ $10s/mo · <b>$$</b> ≈ $100s/mo · <b>$$$</b> ≈ $1,000s/mo · <b>$$$$</b> ≈ surgery (one-time)</p>
+    <p class="disc">For clinician-guided shared decision-making. Trial averages, not individual predictions, and not a substitute for clinical judgment or an eligibility discussion.</p>
+  </footer>
+</div>
 
-        document.getElementById('weightLossForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Get input values
-            const inputType = document.querySelector('input[name="inputType"]:checked').value;
-            const weight = parseFloat(document.getElementById('weight').value);
-            let bmi;
-            
-            // Validate weight
-            if (!weight || weight <= 0) {
-                alert('Please enter a valid weight.');
-                return;
-            }
-            
-            // Calculate or get BMI based on input type
-            if (inputType === 'height') {
-                const height = parseFloat(document.getElementById('height').value);
-                if (!height || height <= 0) {
-                    alert('Please enter a valid height.');
-                    return;
-                }
-                // Calculate BMI from height and weight
-                bmi = (weight * 703) / (height * height);
-            } else {
-                // Get BMI directly from input
-                bmi = parseFloat(document.getElementById('bmi').value);
-                if (!bmi || bmi <= 0) {
-                    alert('Please enter a valid BMI.');
-                    return;
-                }
-            }
-            
-            const roundedBMI = Math.round(bmi * 10) / 10;
-            
-            // Display current weight and BMI
-            document.getElementById('currentWeight').textContent = `Weight: ${weight} lbs`;
-            document.getElementById('currentBMI').textContent = `BMI: ${roundedBMI}`;
-            document.getElementById('bmiCategory').textContent = getBMICategory(roundedBMI);
-            
-            // Check if surgery options should be shown
-            const showSurgery = roundedBMI >= 35;
-            const surgeryNote = document.getElementById('surgeryNote');
-            
-            if (!showSurgery) {
-                surgeryNote.style.display = 'block';
-                surgeryNote.textContent = 'Surgical options are typically considered for patients with BMI ≥ 35. Only medication options are shown below.';
-            } else {
-                surgeryNote.style.display = 'none';
-            }
-            
-            // Calculate and display results
-            const tableBody = document.getElementById('resultsTableBody');
-            tableBody.innerHTML = '';
-            
-            // Add surgical procedures if BMI >= 35
-            if (showSurgery) {
-                const surgicalHeader = tableBody.insertRow();
-                surgicalHeader.innerHTML = '<td colspan="3" class="category-header">Surgical Procedures</td>';
-                
-                weightLossOptions.filter(option => option.category === 'surgical').forEach(option => {
-                    const row = tableBody.insertRow();
-                    const minLoss = Math.round(weight * (option.minPercent / 100));
-                    const maxLoss = Math.round(weight * (option.maxPercent / 100));
-                    
-                    row.innerHTML = `
-                        <td>${option.name}</td>
-                        <td>${minLoss} to ${maxLoss} lbs</td>
-                        <td class="comment-cell">${option.comment}</td>
-                    `;
-                });
-            }
-            
-            // Add medications header
-            const medicationHeader = tableBody.insertRow();
-            medicationHeader.innerHTML = '<td colspan="3" class="category-header">Medications</td>';
-            
-            // Add medications (sorted by effectiveness)
-            weightLossOptions.filter(option => option.category === 'medication')
-                .sort((a, b) => b.maxPercent - a.maxPercent)
-                .forEach(option => {
-                    const row = tableBody.insertRow();
-                    const minLoss = Math.round(weight * (option.minPercent / 100));
-                    const maxLoss = Math.round(weight * (option.maxPercent / 100));
-                    
-                    row.innerHTML = `
-                        <td>${option.name}</td>
-                        <td>${minLoss} to ${maxLoss} lbs</td>
-                        <td class="comment-cell">${option.comment}</td>
-                    `;
-                });
-            
-            // Show result section
-            document.getElementById('result').style.display = 'block';
-            
-            // Scroll to result
-            document.getElementById('result').scrollIntoView({ behavior: 'smooth' });
-        });
-        
-        // Clear result when inputs change
-        document.getElementById('height').addEventListener('input', clearResult);
-        document.getElementById('weight').addEventListener('input', clearResult);
-        document.getElementById('bmi').addEventListener('input', clearResult);
-        
-        function clearResult() {
-            document.getElementById('result').style.display = 'none';
-        }
-    </script>
+<script>
+/* mean % total body-weight loss, highest labeled dose; cost = floor(log10 price) */
+const MEDS = [
+  {grp:"Approved for weight loss — injections", drug:"Tirzepatide (Zepbound)", dose:"15 mg/week", pct:22.5, cost:3},
+  {grp:"Approved for weight loss — injections", drug:"Semaglutide (Wegovy HD)", dose:"7.2 mg/week", pct:20.7, cost:3},
+  {grp:"Approved for weight loss — injections", drug:"Liraglutide (Saxenda)", dose:"3.0 mg/day", pct:8.0, cost:3},
+
+  {grp:"Approved for weight loss — pills", drug:"Oral semaglutide (Wegovy pill)", dose:"25 mg/day", pct:16.6, cost:3},
+  {grp:"Approved for weight loss — pills", drug:"Orforglipron (Foundayo)", dose:"36 mg/day", pct:12.4, cost:2},
+  {grp:"Approved for weight loss — pills", drug:"Phentermine / topiramate (Qsymia)", dose:"15 / 92 mg/day", pct:9.8, cost:2},
+  {grp:"Approved for weight loss — pills", drug:"Naltrexone / bupropion (Contrave)", dose:"32 / 360 mg/day", pct:6.1, cost:2},
+  {grp:"Approved for weight loss — pills", drug:"Orlistat (Xenical)", dose:"120 mg three times daily", pct:5.0, cost:1},
+  {grp:"Approved for weight loss — pills", drug:"Phentermine (Adipex-P)", dose:"37.5 mg/day", pct:5.0, cost:1, note:"short-term use only (~12 wk)"},
+
+  {grp:"Bariatric surgery", drug:"Roux-en-Y gastric bypass", dose:"", pct:30.0, cost:4},
+  {grp:"Bariatric surgery", drug:"Sleeve gastrectomy", dose:"", pct:25.0, cost:4},
+  {grp:"Bariatric surgery", drug:"Adjustable gastric band", dose:"", pct:15.0, cost:4},
+
+  {grp:"Diabetes drugs — off-label for weight loss", drug:"Tirzepatide (Mounjaro)", dose:"15 mg/week", pct:14.7, cost:3},
+  {grp:"Diabetes drugs — off-label for weight loss", drug:"Semaglutide (Ozempic)", dose:"2.0 mg/week", pct:9.6, cost:3},
+  {grp:"Diabetes drugs — off-label for weight loss", drug:"Metformin", dose:"2,000 mg/day", pct:2.0, cost:1},
+];
+const GROUP_NOTE = {
+  "Diabetes drugs — off-label for weight loss":
+    "Not FDA-approved for weight loss. Mounjaro and Ozempic are the same molecules as Zepbound and Wegovy."
+};
+const MAXPCT = Math.max(...MEDS.map(m=>m.pct));
+
+const $ = s => document.querySelector(s);
+const lb  = x => Math.round(x).toLocaleString();
+const pctTxt = p => (p % 1 === 0 ? p.toFixed(0) : p.toFixed(1)) + "%";
+const dollars = n => "$".repeat(n);
+function calc(m, wt, bmi){
+  const loss = wt*m.pct/100;
+  return {loss, after:wt-loss, bmiAfter: bmi ? bmi*(1-m.pct/100) : null};
+}
+
+function render(){
+  const wt=parseFloat($("#wt").value), bmi=parseFloat($("#bmi").value);
+  const hasBmi = !isNaN(bmi) && bmi>0, out=$("#out");
+  if(isNaN(wt) || wt<=0){
+    out.innerHTML='<p class="empty">Enter a starting weight to see estimated results.</p>';
+    $("#actions").style.display="none"; return;
+  }
+  const cols = hasBmi?6:5;
+  let rows="", lastGrp="", i=0;
+  for(const m of MEDS){
+    if(m.grp!==lastGrp){
+      if(lastGrp!=="") rows+=`<tr class="spacer"><td colspan="${cols}"></td></tr>`;
+      rows+=`<tr class="grouprow"><td colspan="${cols}">${m.grp}</td></tr>`;
+      if(GROUP_NOTE[m.grp]) rows+=`<tr class="cat-note"><td colspan="${cols}">${GROUP_NOTE[m.grp]}</td></tr>`;
+      lastGrp=m.grp;
+    }
+    const r=calc(m,wt,hasBmi?bmi:null);
+    const w=Math.max(3,m.pct/MAXPCT*100);
+    const mark=m.note?` <span class="note-mark" title="${m.note}">*</span>`:'';
+    rows+=`<tr class="item${i++%2?' alt':''}">
+      <td><div class="drug">${m.drug}${mark}</div>${m.dose?`<div class="dose">${m.dose}</div>`:''}</td>
+      <td class="ctr"><span class="cost" title="typical cost">${dollars(m.cost)}</span></td>
+      <td class="num"><div class="eff"><span class="val">${pctTxt(m.pct)}</span><span class="bar"><i style="width:${w}%"></i></span></div></td>
+      <td class="num lb hidem">${lb(r.loss)}</td>
+      <td class="num after">${lb(r.after)}</td>
+      ${hasBmi?`<td class="num bmi">${r.bmiAfter.toFixed(1)}</td>`:''}
+    </tr>`;
+  }
+  out.innerHTML=`<table class="results">
+    <caption>Starting weight ${lb(wt)} lb${hasBmi?` · BMI ${bmi.toFixed(1)}`:''} — estimated results</caption>
+    <thead><tr>
+      <th>Option</th><th class="ctr">Cost</th><th class="num">Est. weight loss</th>
+      <th class="num hidem">lb lost</th><th class="num">Weight after</th>
+      ${hasBmi?'<th class="num">BMI after</th>':''}
+    </tr></thead><tbody>${rows}</tbody></table>`;
+  $("#actions").style.display="flex";
+}
+
+function buildEpic(){
+  const wt=parseFloat($("#wt").value), bmi=parseFloat($("#bmi").value);
+  const hasBmi=!isNaN(bmi)&&bmi>0;
+  const bd="1px solid #999";
+  const th=' style="border:'+bd+';padding:4px 8px;text-align:left;background:#eee;font-weight:bold;"';
+  const td=' style="border:'+bd+';padding:4px 8px;"';
+  const tc=' style="border:'+bd+';padding:4px 8px;text-align:center;"';
+  const tr=' style="border:'+bd+';padding:4px 8px;text-align:right;"';
+  const span=hasBmi?5:4;
+
+  let html=`<p style="font-family:Arial,sans-serif;font-size:11pt;margin:0 0 6px;"><b>Estimated weight-loss options</b> — starting weight ${lb(wt)} lb${hasBmi?`, BMI ${bmi.toFixed(1)}`:''}:</p>`;
+  html+=`<table style="border-collapse:collapse;font-family:Arial,sans-serif;font-size:10pt;">`;
+  html+=`<tr><th${th}>Option</th><th${th}>Cost</th><th${th}>Est. weight loss</th><th${th}>Est. weight after</th>${hasBmi?`<th${th}>Est. BMI after</th>`:''}</tr>`;
+  let text=`Estimated weight-loss options — starting weight ${lb(wt)} lb${hasBmi?`, BMI ${bmi.toFixed(1)}`:''}:\n\n`;
+  text+=`Option\tCost\tEst. weight loss\tEst. weight after${hasBmi?'\tEst. BMI after':''}\n`;
+
+  let lastGrp="";
+  for(const m of MEDS){
+    if(m.grp!==lastGrp){
+      html+=`<tr><td colspan="${span}" style="border:${bd};padding:5px 8px;background:#f4f4f4;font-weight:bold;">${m.grp}</td></tr>`;
+      text+=`\n[${m.grp}]\n`; lastGrp=m.grp;
+    }
+    const r=calc(m,wt,hasBmi?bmi:null);
+    const name=m.drug+(m.dose?` — ${m.dose}`:'');
+    const lossCell=`~${pctTxt(m.pct)} (≈${lb(r.loss)} lb)`;
+    html+=`<tr><td${td}>${name}</td><td${tc}>${dollars(m.cost)}</td><td${tr}>${lossCell}</td><td${tr}>~${lb(r.after)} lb</td>${hasBmi?`<td${tr}>~${r.bmiAfter.toFixed(1)}</td>`:''}</tr>`;
+    text+=`${name}\t${dollars(m.cost)}\t${lossCell}\t~${lb(r.after)} lb${hasBmi?`\t~${r.bmiAfter.toFixed(1)}`:''}\n`;
+  }
+  html+=`</table>`;
+  const disc=`Cost: $=~$10s/mo, $$=~$100s/mo, $$$=~$1,000s/mo, $$$$=surgery (one-time). Trial averages; individual results vary. Phentermine short-term only. Metformin, Mounjaro, and Ozempic are not FDA-approved for weight loss. For shared decision-making, not a guarantee.`;
+  html+=`<p style="font-family:Arial,sans-serif;font-size:8pt;color:#555;margin:6px 0 0;">${disc}</p>`;
+  text+=`\n${disc}\n`;
+  return {html,text};
+}
+
+/* writes both text/html and text/plain flavors via the copy event —
+   works in file:// and non-secure contexts where clipboard.write() is blocked */
+function writeRich(html, text){
+  let ok=false;
+  const listener = e => {
+    e.clipboardData.setData("text/html", html);
+    e.clipboardData.setData("text/plain", text);
+    e.preventDefault(); ok=true;
+  };
+  document.addEventListener("copy", listener);
+  const sel=window.getSelection(), range=document.createRange();
+  const span=document.createElement("span");
+  span.textContent="\u00a0"; span.style.cssText="position:fixed;opacity:0;pointer-events:none;";
+  document.body.appendChild(span);
+  range.selectNodeContents(span); sel.removeAllRanges(); sel.addRange(range);
+  try{ document.execCommand("copy"); }catch(_){}
+  sel.removeAllRanges(); document.body.removeChild(span);
+  document.removeEventListener("copy", listener);
+  return ok;
+}
+
+async function copyEpic(){
+  const {html,text}=buildEpic();
+  if(writeRich(html,text)){ flash(); return; }              // primary: HTML flavor everywhere
+  try{                                                       // secondary: async Clipboard API
+    await navigator.clipboard.write([new ClipboardItem({
+      "text/html":new Blob([html],{type:"text/html"}),
+      "text/plain":new Blob([text],{type:"text/plain"})
+    })]); flash(); return;
+  }catch(e){}
+  fallback(text);                                            // last resort: plain text only
+}
+async function copyText(){
+  const {text}=buildEpic();
+  try{ await navigator.clipboard.writeText(text); flash(); }catch(e){ fallback(text); }
+}
+function flash(){ const c=$("#copied"); c.classList.add("show"); setTimeout(()=>c.classList.remove("show"),1400); }
+function fallback(text){
+  const ta=document.createElement("textarea"); ta.value=text; ta.style.position="fixed"; ta.style.opacity="0";
+  document.body.appendChild(ta); ta.select();
+  try{ document.execCommand("copy"); flash(); }catch(_){ alert("Copy failed — select the table manually."); }
+  document.body.removeChild(ta);
+}
+
+$("#wt").addEventListener("input",render);
+$("#bmi").addEventListener("input",render);
+$("#copyEpic").addEventListener("click",copyEpic);
+$("#copyText").addEventListener("click",copyText);
+render();
+</script>
 </body>
 </html>
