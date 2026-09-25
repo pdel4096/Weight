@@ -332,11 +332,13 @@ $("#wt").addEventListener("input",render);
 $("#bmi").addEventListener("input",render);
 $("#copyEpic").addEventListener("click",copyEpic);
 $("#copyText").addEventListener("click",copyText);
-/* prefill from the web address, e.g. WeightLoss.html?weight=235&bmi=36 */
+/* prefill from the web address, e.g. WeightLoss.html?weight=235&bmi=36
+   or ?weight=235 36  (second number = BMI; for one-slot launchers like Alfred) */
 {
   const q = new URLSearchParams(location.search);
-  const qw = parseFloat(q.get("weight") ?? q.get("wt"));
-  const qb = parseFloat(q.get("bmi"));
+  const parts = (q.get("weight") ?? q.get("wt") ?? "").split(/[\s,\/;]+/).filter(Boolean);
+  const qw = parseFloat(parts[0]);
+  const qb = parseFloat(q.get("bmi") ?? parts[1]);
   if (qw > 0) $("#wt").value = qw;
   if (qb > 0) $("#bmi").value = qb;
 }
