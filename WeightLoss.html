@@ -332,6 +332,14 @@ $("#wt").addEventListener("input",render);
 $("#bmi").addEventListener("input",render);
 $("#copyEpic").addEventListener("click",copyEpic);
 $("#copyText").addEventListener("click",copyText);
+/* prefill from the web address, e.g. WeightLoss.html?weight=235&bmi=36 */
+{
+  const q = new URLSearchParams(location.search);
+  const qw = parseFloat(q.get("weight") ?? q.get("wt"));
+  const qb = parseFloat(q.get("bmi"));
+  if (qw > 0) $("#wt").value = qw;
+  if (qb > 0) $("#bmi").value = qb;
+}
 render();
 </script>
 </body>
