@@ -56,6 +56,8 @@
   table.results th.ctr,table.results td.ctr{text-align:center}
   tr.spacer td{padding:0;height:9px;border:none;background:var(--paper)}
   .grouprow td{padding:8px 12px;font-size:16px;font-weight:700;background:#E6EAEB;color:#35959A;letter-spacing:.01em;border-radius:8px 8px 0 0}
+  tr.cont{display:none}
+  tr.cont td{color:var(--muted);font-style:italic;font-size:12px;padding:6px 9px 0}
   .grp-sub{font-size:13px;font-weight:400;color:#5A6169;margin-left:12px;letter-spacing:0}
   .cat-note td{padding:6px 9px 3px;color:var(--muted);font-size:12px;font-weight:400;text-transform:none;letter-spacing:0}
   tr.item td{padding:6px 9px;border-bottom:1px solid #D5DBDC;vertical-align:middle}
@@ -107,6 +109,7 @@
     table.results th.hidem,table.results td.hidem{display:table-cell}
     tr.item{page-break-inside:avoid}
     tr.pagebreak{break-before:page;page-break-before:always}
+    tr.cont{display:table-row}
     header{padding-bottom:6px;margin-bottom:10px}
     h1{font-size:22px}
     .lede{font-size:12px}
@@ -221,6 +224,7 @@ function render(){
   for(const m of MEDS){
     if(m.grp!==lastGrp){
       if(lastGrp!=="") rows+=`<tr class="spacer"><td colspan="${cols}"></td></tr>`;
+      if(m.grp==="Bariatric surgery") rows+=`<tr class="cont"><td colspan="${cols}">(continues on next page, for certain populations)</td></tr>`;
       rows+=`<tr class="grouprow${m.grp==="Bariatric surgery"?' pagebreak':''}"><td colspan="${cols}">${m.grp}${GROUP_SUB[m.grp]?`<span class="grp-sub">${GROUP_SUB[m.grp]}</span>`:''}</td></tr>`;
       if(GROUP_NOTE[m.grp]) rows+=`<tr class="cat-note"><td colspan="${cols}">${GROUP_NOTE[m.grp]}</td></tr>`;
       lastGrp=m.grp; i=0;
